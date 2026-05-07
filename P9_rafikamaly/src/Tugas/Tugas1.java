@@ -10,6 +10,50 @@ package Tugas;
  */
 public class Tugas1 extends javax.swing.JFrame {
     
+    MemberGym[] data = new MemberGym[50];
+    int index = 0;
+        
+    abstract class MemberGym {
+        protected String nama;
+        protected int durasi;
+        
+        public MemberGym(String nama, int durasi) {
+            this.nama = nama;
+            this.durasi = durasi;
+        }
+        
+        public abstract double hitungBiaya();
+        
+        public String getInfo() {
+            String info = nama + " | " + durasi + " bulan";
+            return info;
+        }
+    }
+    
+    class Premium extends MemberGym {
+        
+        public Premium(String nama, int durasi) {
+            super(nama, durasi);
+        }
+        
+        @Override
+        public double hitungBiaya() {
+            return durasi * 300000;
+        }
+    }
+    
+    class Reguler extends MemberGym {
+       
+        public Reguler(String nama, int durasi) {
+            super(nama, durasi);
+        }
+        
+        @Override
+        public double hitungBiaya() {
+            return durasi * 150000;
+        }
+    }
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Tugas1.class.getName());
 
     /**
@@ -17,6 +61,9 @@ public class Tugas1 extends javax.swing.JFrame {
      */
     public Tugas1() {
         initComponents();
+        setLocationRelativeTo(null);
+        rbReguler.setSelected(true);
+        cmbTrainer.setSelectedIndex(0);
     }
 
     /**
@@ -28,21 +75,166 @@ public class Tugas1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtNama = new javax.swing.JTextField();
+        txtDurasi = new javax.swing.JTextField();
+        rbReguler = new javax.swing.JRadioButton();
+        rbPremium = new javax.swing.JRadioButton();
+        cmbTrainer = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtArea = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("MEMBERSHIP GYM");
+
+        jLabel2.setText("Nama");
+
+        jLabel3.setText("Durasi");
+
+        jLabel4.setText("Member");
+
+        jLabel5.setText("Trainer");
+
+        buttonGroup1.add(rbReguler);
+        rbReguler.setText("Reguler");
+
+        buttonGroup1.add(rbPremium);
+        rbPremium.setText("Premium");
+        rbPremium.addActionListener(this::rbPremiumActionPerformed);
+
+        cmbTrainer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tidak Ada", "Personal Trainer" }));
+
+        jButton1.setText("Tambah");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        jButton2.setText("Hitung");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+
+        jLabel6.setText("/bulan");
+
+        txtArea.setColumns(20);
+        txtArea.setRows(5);
+        jScrollPane1.setViewportView(txtArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtDurasi, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(rbReguler)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rbPremium))
+                                    .addComponent(cmbTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNama))))))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDurasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(rbReguler)
+                    .addComponent(rbPremium))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cmbTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void rbPremiumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPremiumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbPremiumActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (txtNama.getText().isEmpty() || txtDurasi.getText().isEmpty()) {
+            txtArea.setText("Data tidak lengkap\n");
+            return;
+        }
+        
+        int durasi = Integer.parseInt(txtDurasi.getText());
+        MemberGym m;
+        
+        if (rbPremium.isSelected()) {
+            m = new Premium(txtNama.getText(), durasi);
+        } else {
+            m = new Reguler(txtNama.getText(), durasi);
+        }
+        
+        data[index++] = m;
+        
+        txtArea.append("Data: " + m.getInfo() + "\n");
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (index == 0) {
+            txtArea.setText("Belum ada data\n");
+            return;
+        }
+        
+        MemberGym last = data[index-1];
+        double total = last.hitungBiaya();
+        
+        txtArea.append("---------------\n");
+        txtArea.append("Biaya: Rp " + total + "\n");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +262,21 @@ public class Tugas1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cmbTrainer;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton rbPremium;
+    private javax.swing.JRadioButton rbReguler;
+    private javax.swing.JTextArea txtArea;
+    private javax.swing.JTextField txtDurasi;
+    private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
 }
